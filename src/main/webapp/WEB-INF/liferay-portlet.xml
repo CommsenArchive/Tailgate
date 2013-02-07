@@ -5,6 +5,7 @@
 	<portlet>
 		<portlet-name>tailgate</portlet-name>
 		<icon>/icon.png</icon>
+		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
 		<instanceable>true</instanceable>
 		<header-portlet-css>/css/tailgate.css</header-portlet-css>
 		<header-portlet-javascript>/js/tailgate.js</header-portlet-javascript>

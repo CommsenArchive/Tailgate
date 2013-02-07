@@ -6,20 +6,32 @@
 		<display-name>Tailgate Portlet</display-name>
 		<portlet-class>com.commsen.liferay.portlet.tailgate.TailgatePortlet</portlet-class>
 		<init-param>
-			<name>view-jsp</name>
+			<name>view-template</name>
 			<value>/view.jsp</value>
 		</init-param>
 		<init-param>
-			<name>edit-jsp</name>
-			<value>/edit.jsp</value>
+			<name>config-template</name>
+			<value>/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
-			<portlet-mode>edit</portlet-mode>
 		</supports>
 		<resource-bundle>content.tailgate</resource-bundle>
+        <portlet-preferences>
+            <preference>
+                <name>fileName</name>
+            </preference>
+            <preference>
+                <name>lines</name>
+                <value>100</value>
+            </preference>
+            <preference>
+                <name>height</name>
+                <value>300px</value>
+            </preference>
+        </portlet-preferences>
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>

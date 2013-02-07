@@ -22,10 +22,10 @@
 <div>
 <button id="<portlet:namespace />_start">Start</button>
 <button id="<portlet:namespace />_stop">Stop</button>
-listing file <strong><%=prefs.getValue("fileName","")%></strong>. <small>(Showing only last <%=prefs.getValue("lines","100")%> lines)</small>
+listing file <strong><%=fileName%></strong>. <small>(Showing only last <%=lines%> lines)</small>
 </div>
 
-	<ul id="<portlet:namespace />list" class="tailgate" style="height: <%=prefs.getValue("height","300px")%>"> 
+	<ul id="<portlet:namespace />list" class="tailgate" style="height: <%=height%>"> 
 		<%=request.getAttribute("lines") %>
 	</ul> 
 	 
@@ -33,7 +33,7 @@ listing file <strong><%=prefs.getValue("fileName","")%></strong>. <small>(Showin
 	<script type="text/javascript">
 		<!-- 
 		jQuery("#<portlet:namespace />_stop").hide();
-		tailgateInstances["<portlet:namespace />"] = new Tailgate(<%=prefs.getValue("lines","100")%>, "<liferay-portlet:resourceURL />"); 
+		tailgateInstances["<portlet:namespace />"] = new Tailgate(<%=lines%>, "<liferay-portlet:resourceURL />"); 
 		jQuery("#<portlet:namespace />_start").click(function(){
 			startReading("<portlet:namespace />");
 			jQuery("#<portlet:namespace />_start").hide();

@@ -22,14 +22,29 @@
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %>
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
 
 <%@page import="javax.portlet.PortletPreferences"%>
-
+<%@page import="com.liferay.portal.kernel.util.GetterUtil"%>
+<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
+<%@page import="com.liferay.portal.kernel.util.Constants"%>
+<%@page import="com.liferay.portlet.PortletPreferencesFactoryUtil"%>
 
 <liferay-theme:defineObjects />
 <portlet:defineObjects />
 
+
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	portletPreferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+}
+
+
+String fileName = GetterUtil.getString(portletPreferences.getValue("fileName", null));
+int lines = GetterUtil.getInteger(portletPreferences.getValue("lines", "100"));
+String height = GetterUtil.getString(portletPreferences.getValue("height", null));
 %>
