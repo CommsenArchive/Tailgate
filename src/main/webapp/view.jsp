@@ -25,25 +25,47 @@
 listing file <strong><%=fileName%></strong>. <small>(Showing only last <%=lines%> lines)</small>
 </div>
 
-	<ul id="<portlet:namespace />list" class="tailgate" style="height: <%=height%>"> 
+	<ul id="<portlet:namespace />_list" class="tailgate" style="height: <%=height%>"> 
 		<%=request.getAttribute("lines") %>
 	</ul> 
 	 
 
-	<script type="text/javascript">
-		<!-- 
-		jQuery("#<portlet:namespace />_stop").hide();
-		tailgateInstances["<portlet:namespace />"] = new Tailgate(<%=lines%>, "<liferay-portlet:resourceURL />"); 
-		jQuery("#<portlet:namespace />_start").click(function(){
-			startReading("<portlet:namespace />");
-			jQuery("#<portlet:namespace />_start").hide();
-			jQuery("#<portlet:namespace />_stop").show();
-		})
-		jQuery("#<portlet:namespace />_stop").click(function(){
-			stopReading("<portlet:namespace />");
-			jQuery("#<portlet:namespace />_start").show();
-			jQuery("#<portlet:namespace />_stop").hide();
-		})
-
-		-->
-	</script> 
+	<aui:script use="aui-io-request">
+	
+	var handle;
+	clearInterval(handle);
+	A.one('#<portlet:namespace />_stop').hide();
+	
+	A.one('#<portlet:namespace />_start').on('click', function() {
+		handle = setInterval(
+			function() {
+				A.io.request('<liferay-portlet:resourceURL />', {
+					on: {
+						success: function() {
+		        			var data = this.get('responseData');
+		        			A.one('#<portlet:namespace />_list').append(data);
+		        			
+		        			// delete first lines if too long 				
+							var lines = A.all('#<portlet:namespace />_list li').size();
+							if (lines > <%=lines%>) {
+								A.all('#<portlet:namespace />_list li').slice(0, lines - <%=lines%>).remove();
+							}
+		      			}
+		    		}
+				});
+			},
+			1000
+		);
+		A.one('#<portlet:namespace />_start').hide();
+		A.one('#<portlet:namespace />_stop').show();	
+		A.one('#<portlet:namespace />_list').addClass('tailgateRunnig');
+	});
+		
+	A.one('#<portlet:namespace />_stop').on('click', function() {
+		clearInterval(handle);
+		A.one('#<portlet:namespace />_stop').hide();	
+		A.one('#<portlet:namespace />_start').show();
+		A.one('#<portlet:namespace />_list').removeClass('tailgateRunnig');
+	});
+	
+	</aui:script>

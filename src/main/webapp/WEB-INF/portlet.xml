@@ -21,9 +21,6 @@
 		<resource-bundle>content.tailgate</resource-bundle>
         <portlet-preferences>
             <preference>
-                <name>fileName</name>
-            </preference>
-            <preference>
                 <name>lines</name>
                 <value>100</value>
             </preference>
