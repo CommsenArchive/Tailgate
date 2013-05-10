@@ -30,6 +30,7 @@
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL %>" />
 	
+	<liferay-ui:error key="NOT_VALID_FILE_NAME" message="please-enter-valid-file-name" />
 	<aui:input  label="file.name" name="preferences--fileName--" type="text" value='<%=fileName%>' />
 	<aui:input  label="lines.to.show" name="preferences--lines--" type="text" value='<%=lines%>' />
 	<aui:input  label="window.height" name="preferences--height--" type="text" value='<%=height%>' />
